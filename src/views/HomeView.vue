@@ -127,6 +127,7 @@ textarea {
 .converted-message-wrapper {
   padding: 0.5rem;
   background-color: aquamarine;
+  overflow-wrap: break-word;
 }
 
 .copy-btn-wrapper {
