@@ -37,6 +37,7 @@ const converted = computed(() => {
 });
 
 const setMode = (value: ControlState) => {
+  message.value = "";
   state.value = value;
 };
 
