@@ -65,7 +65,7 @@ const copyText = () => {
         <p v-if="state === ControlState.ENCRYPTER">
           Use this to send a message to your loved one.
         </p>
-        <p v-if="state === ControlState.DECRYPTER">
+        <p v-else-if="state === ControlState.DECRYPTER">
           Received an encrypted message? Use this to read it.
         </p>
       </div>
