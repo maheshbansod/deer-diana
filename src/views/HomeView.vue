@@ -76,7 +76,7 @@ const copyText = () => {
     </div>
     <textarea :placeholder="state === ControlState.ENCRYPTER?senderPlaceholder:receivedPlaceholder"
       v-model="message"></textarea>
-    <div class="converted-message-wrapper" v-if="message.length > 0">
+    <div class="converted-message-wrapper" v-show="message.length > 0">
       <div class="copy-btn-wrapper">
         <button @click="copyText" class="copy-btn">Copy text</button>
       </div>
