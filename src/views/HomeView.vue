@@ -52,11 +52,11 @@ const copyText = () => {
     <h1>Hii</h1>
     <div class="mode-area">
       <div class="mode-title">
-        <div @click="() => setMode(ControlState.ENCRYPTER)"
+        <div @click="setMode(ControlState.ENCRYPTER)"
           :class="{'mode-title--selected':state === ControlState.ENCRYPTER}">
           Encrypt
         </div>
-        <div @click="() => setMode(ControlState.DECRYPTER)"
+        <div @click="setMode(ControlState.DECRYPTER)"
           :class="{'mode-title--selected':state === ControlState.DECRYPTER}">
           Decrypt
         </div>
