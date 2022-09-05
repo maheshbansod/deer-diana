@@ -129,6 +129,7 @@ textarea {
   padding: 0.5rem;
   background-color: aquamarine;
   overflow-wrap: break-word;
+  white-space: pre-line;
 }
 
 .copy-btn-wrapper {
