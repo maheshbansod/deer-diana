@@ -74,20 +74,22 @@ const copyText = () => {
       <span>Key</span>
       <input type="text" placeholder="Key" v-model="key" />
     </div>
-    <textarea :placeholder="state === ControlState.ENCRYPTER?senderPlaceholder:receivedPlaceholder"
-      v-model="message"></textarea>
-    <div class="converted-message-wrapper" v-show="message.length > 0">
-      <div class="copy-btn-wrapper">
-        <button @click="copyText" class="copy-btn">Copy text</button>
+    <div class="content">
+      <textarea :placeholder="state === ControlState.ENCRYPTER?senderPlaceholder:receivedPlaceholder"
+        v-model="message"></textarea>
+      <div class="converted-message-wrapper" v-show="message.length > 0">
+        <div class="copy-btn-wrapper">
+          <button @click="copyText" class="copy-btn">Copy text</button>
+        </div>
+        {{ converted }}
       </div>
-      {{ converted }}
     </div>
   </main>
 </template>
 
 <style scoped>
 textarea {
-  width: 100%;
+  width: 50%;
   min-height: 70vh;
   padding: 0.5rem;
 }
@@ -126,6 +128,7 @@ textarea {
 }
 
 .converted-message-wrapper {
+  width: 50%;
   padding: 0.5rem;
   background-color: aquamarine;
   overflow-wrap: break-word;
@@ -149,5 +152,19 @@ textarea {
 
 .copy-btn:hover {
   background-color: rgb(0, 0, 0, 0.1);
+}
+
+.content {
+  display: flex;
+}
+
+@media only screen and (max-width: 600px) {
+  .content {
+    display: block;
+  }
+
+  textarea, .converted-message-wrapper {
+    width: 100%;
+  }
 }
 </style>
