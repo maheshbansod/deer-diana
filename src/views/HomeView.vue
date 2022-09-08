@@ -128,6 +128,7 @@ textarea {
 .converted-message-wrapper {
   padding: 0.5rem;
   background-color: aquamarine;
+  color: black;
   overflow-wrap: break-word;
   white-space: pre-line;
 }
