@@ -181,5 +181,12 @@ const copyText = () => {
   .editor, .converted-message-wrapper {
     width: 100%;
   }
+  .editor {
+    display: flex;
+    flex-direction: column;
+  }
+  .editor > :deep(.ql-container) {
+    flex: 1;
+  }
 }
 </style>
