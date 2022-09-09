@@ -178,7 +178,7 @@ const copyText = () => {
     display: block;
   }
 
-  textarea, .converted-message-wrapper {
+  .editor, .converted-message-wrapper {
     width: 100%;
   }
 }
