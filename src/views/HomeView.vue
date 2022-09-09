@@ -84,7 +84,7 @@ const copyText = () => {
     <div class="content">
       <template v-if="state === ControlState.ENCRYPTER">
         <div class="editor">
-          <QuillEditor toolbar="minimal" v-model:content="message" contentType="html"/>
+          <QuillEditor theme="snow" v-model:content="message" contentType="html"/>
         </div>
       </template>
       <template v-else>
