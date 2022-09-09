@@ -38,7 +38,6 @@ const decryptText = (text: string, key: string) => {
 }
 
 const converted = computed(() => {
-  // TODO: make sure data not malformed for decrypt
   return state.value === ControlState.ENCRYPTER ?
     encryptText(message.value, key.value)
     : decryptText(message.value, key.value);
@@ -83,9 +82,16 @@ const copyText = () => {
       <input type="text" placeholder="Key" v-model="key" />
     </div>
     <div class="content">
-      <textarea :placeholder="state === ControlState.ENCRYPTER?senderPlaceholder:receivedPlaceholder"
+      <template v-if="state === ControlState.ENCRYPTER">
+        <div class="editor">
+          <QuillEditor toolbar="minimal" v-model:content="message" contentType="html"/>
+        </div>
+      </template>
+      <template v-else>
+      <textarea class="editor" :placeholder="receivedPlaceholder"
         v-model="message"></textarea>
-      <div class="converted-message-wrapper" v-show="message.length > 0">
+      </template>
+      <div class="converted-message-wrapper" v-show="message?.length > 0">
         <div class="copy-btn-wrapper">
           <button @click="copyText" class="copy-btn">Copy text</button>
         </div>
@@ -96,7 +102,7 @@ const copyText = () => {
 </template>
 
 <style scoped>
-textarea {
+.editor {
   width: 50%;
   min-height: 70vh;
   padding: 0.5rem;
