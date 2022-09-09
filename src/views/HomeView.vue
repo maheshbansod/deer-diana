@@ -26,7 +26,15 @@ const encryptText = (text: string, key: string) => {
 }
 
 const decryptText = (text: string, key: string) => {
-  return AES.decrypt(text, `${KEY_PREFIX}${key}`).toString(enc.Utf8);
+  try {
+    let decrypted =  AES.decrypt(text, `${KEY_PREFIX}${key}`).toString(enc.Utf8);
+    if(decrypted.includes("http")) {
+      decrypted = decrypted.replace(/(https?:\/\/.+?)([\s$])/g, `<a href="$1">$1</a>$2`)
+    }
+    return decrypted;
+  } catch {
+    return "Invalid"
+  }
 }
 
 const converted = computed(() => {
@@ -81,7 +89,7 @@ const copyText = () => {
         <div class="copy-btn-wrapper">
           <button @click="copyText" class="copy-btn">Copy text</button>
         </div>
-        {{ converted }}
+        <span v-html="converted"></span>
       </div>
     </div>
   </main>
