@@ -27,11 +27,7 @@ const encryptText = (text: string, key: string) => {
 
 const decryptText = (text: string, key: string) => {
   try {
-    let decrypted =  AES.decrypt(text, `${KEY_PREFIX}${key}`).toString(enc.Utf8);
-    if(decrypted.includes("http")) {
-      decrypted = decrypted.replace(/(https?:\/\/.+?)([\s$])/g, `<a href="$1">$1</a>$2`)
-    }
-    return decrypted;
+    return AES.decrypt(text, `${KEY_PREFIX}${key}`).toString(enc.Utf8);
   } catch {
     return "Invalid"
   }
