@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import {AES, enc} from 'crypto-js';
+import { computed, inject, ref } from "vue";
+import { AES, enc } from 'crypto-js';
 import { copyTextToClipboard } from "@/utils/common";
+import type { ToasterController } from "@/components/toaster/Toaster";
 
 const senderPlaceholder = `Write your message here. e.g.
 Deer Diana,
@@ -18,6 +19,8 @@ enum ControlState {
 const key = ref("0");
 const message = ref("");
 const state = ref(ControlState.ENCRYPTER);
+
+const $toaster = inject<ToasterController>('toaster');
 
 const KEY_PREFIX = "secret key prefix";
 
@@ -46,6 +49,7 @@ const setMode = (value: ControlState) => {
 
 const copyText = () => {
   copyTextToClipboard(converted.value);
+  $toaster?.show("Copied to clipboard");
 }
 
 </script>
@@ -60,7 +64,7 @@ const copyText = () => {
           Encrypt
         </div>
         <div @click="setMode(ControlState.DECRYPTER)"
-          :class="{'mode-title--selected':state === ControlState.DECRYPTER}">
+          :class="{ 'mode-title--selected': state === ControlState.DECRYPTER }">
           Decrypt
         </div>
       </div>
@@ -80,12 +84,11 @@ const copyText = () => {
     <div class="content">
       <template v-if="state === ControlState.ENCRYPTER">
         <div class="editor">
-          <QuillEditor theme="snow" v-model:content="message" contentType="html"/>
+          <QuillEditor theme="snow" v-model:content="message" contentType="html" />
         </div>
       </template>
       <template v-else>
-      <textarea class="editor" :placeholder="receivedPlaceholder"
-        v-model="message"></textarea>
+        <textarea class="editor" :placeholder="receivedPlaceholder" v-model="message"></textarea>
       </template>
       <div class="converted-message-wrapper" v-show="message?.length > 0">
         <div class="copy-btn-wrapper">
@@ -174,14 +177,17 @@ const copyText = () => {
     display: block;
   }
 
-  .editor, .converted-message-wrapper {
+  .editor,
+  .converted-message-wrapper {
     width: 100%;
   }
+
   .editor {
     display: flex;
     flex-direction: column;
   }
-  .editor > :deep(.ql-container) {
+
+  .editor> :deep(.ql-container) {
     flex: 1;
   }
 }
