@@ -86,7 +86,7 @@ const copyText = () => {
     <div class="content">
       <template v-if="state === ControlState.ENCRYPTER">
         <div class="editor">
-          <QuillEditor theme="snow" v-model:content="message" contentType="html" />
+          <QuillEditor :placeholder="senderPlaceholder" theme="snow" v-model:content="message" contentType="html" />
         </div>
       </template>
       <template v-else>
@@ -105,7 +105,9 @@ const copyText = () => {
 <style scoped>
 .editor {
   width: 50%;
-  min-height: 70vh;
+  height: 70vh;
+  /* padding needed to make sure the last line isn't hidden on overflow */
+  padding-bottom: 1rem;
 }
 
 .mode-area {
