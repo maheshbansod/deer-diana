@@ -60,6 +60,7 @@ const copyText = () => {
     <h1>Hii</h1>
     <div class="mode-area">
       <div class="mode-title">
+        <span>Mode</span>
         <div @click="setMode(ControlState.ENCRYPTER)"
           :class="{'mode-title--selected':state === ControlState.ENCRYPTER}">
           Encrypt
@@ -118,16 +119,20 @@ const copyText = () => {
   width: 100%;
 }
 
-.mode-title>* {
-  width: 100%;
+.mode-title>div {
+  width: 50%;
   cursor: pointer;
   padding: 0.2rem;
   text-align: center;
   user-select: none;
+  position: absolute;
+  transform: translateX(100%);
+  transition: transform 0.2s;
 }
 
-.mode-title--selected {
+div.mode-title--selected {
   background-color: var(--color-background-soft);
+  transform: translate(0);
 }
 
 .input-wrapper {
