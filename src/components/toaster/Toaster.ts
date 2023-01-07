@@ -1,6 +1,5 @@
 
-import type { Plugin } from 'vue';
-import { reactive } from 'vue';
+import { ref, type Plugin } from 'vue';
 
 // plugin
 export const Toaster = {
@@ -10,13 +9,13 @@ export const Toaster = {
 } satisfies Plugin;
 
 export class ToasterController {
-    toast = reactive({ message: "" });
+    message = ref("");
     maxShowTime = 4000;
 
     private showTimeout?: NodeJS.Timer;
 
     get isVisible() {
-        return this.toast.message !== "";
+        return this.message.value !== "";
     }
 
     show(message: string) {
@@ -24,10 +23,10 @@ export class ToasterController {
             this.clearTimeout();
         }
 
-        this.toast.message = message;
+        this.message.value = message;
 
         this.showTimeout = setInterval(() => {
-            this.toast.message = "";
+            this.message.value = "";
             this.clearTimeout();
         }, this.maxShowTime);
     }
