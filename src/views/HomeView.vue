@@ -123,12 +123,15 @@ const copyText = () => {
 .mode-title>div {
   width: 50%;
   cursor: pointer;
-  padding: 0.2rem;
-  text-align: center;
-  user-select: none;
   position: absolute;
   transform: translateX(100%);
   transition: transform 0.2s;
+}
+
+.mode-title > * {
+  padding: 0.2rem;
+  text-align: center;
+  user-select: none;
 }
 
 div.mode-title--selected {
