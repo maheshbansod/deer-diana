@@ -3,6 +3,7 @@ import { computed, inject, ref } from "vue";
 import { AES, enc } from 'crypto-js';
 import { copyTextToClipboard } from "@/utils/common";
 import type { ToasterController } from "@/components/toaster/Toaster";
+import Button from '@/components/Button/Button.vue';
 
 const senderPlaceholder = `Write your message here. e.g.
 Deer Diana,
@@ -92,7 +93,7 @@ const copyText = () => {
       </template>
       <div class="converted-message-wrapper" v-show="message?.length > 0">
         <div class="copy-btn-wrapper">
-          <button @click="copyText" class="copy-btn">Copy text</button>
+          <Button @click="copyText" class="copy-btn">Copy text</Button>
         </div>
         <span v-html="converted"></span>
       </div>
@@ -152,20 +153,6 @@ const copyText = () => {
 .copy-btn-wrapper {
   display: flex;
   justify-content: flex-end;
-}
-
-.copy-btn {
-  background-color: transparent;
-  color: black;
-  padding: 0.2rem;
-  outline: none;
-  border: 1px solid grey;
-  border-radius: 3px;
-  display: block;
-}
-
-.copy-btn:hover {
-  background-color: rgb(0, 0, 0, 0.1);
 }
 
 .content {
