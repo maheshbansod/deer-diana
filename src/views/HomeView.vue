@@ -106,7 +106,6 @@ const copyText = () => {
 .editor {
   width: 50%;
   min-height: 70vh;
-  padding: 0.5rem;
 }
 
 .mode-area {
