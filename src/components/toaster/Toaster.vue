@@ -5,7 +5,7 @@ const $toaster = inject<ToasterController>('toaster');
 </script>
 <template>
     <div class="toaster" v-if="$toaster?.isVisible">
-        {{ $toaster.toast.message }}
+        {{ $toaster.message }}
     </div>
 </template>
 
