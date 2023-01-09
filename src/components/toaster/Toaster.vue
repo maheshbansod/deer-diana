@@ -15,7 +15,7 @@ const $toaster = inject<ToasterController>('toaster');
 .toaster {
     min-width: 100px;
     text-align: center;
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     left: 50%;
     transform: translate(-50%);
@@ -30,12 +30,15 @@ const $toaster = inject<ToasterController>('toaster');
 .toaster-enter-active {
     transition: all 0.3s;
 }
+
 .toaster-enter-from {
     transform: translate(-50%, 100%);
 }
+
 .toaster-leave-active {
     transition: all 0.5s;
 }
+
 .toaster-leave-from {
     opacity: 1;
 }
@@ -43,5 +46,4 @@ const $toaster = inject<ToasterController>('toaster');
 .toaster-leave-to {
     opacity: 0;
 }
-
 </style>
