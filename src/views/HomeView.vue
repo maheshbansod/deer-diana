@@ -4,6 +4,7 @@ import { AES, enc } from 'crypto-js';
 import { copyTextToClipboard } from "@/utils/common";
 import type { ToasterController } from "@/components/toaster/Toaster";
 import Button from '@/components/Button/Button.vue';
+import Typewriter from '@/components/Typewriter.vue';
 
 const senderPlaceholder = `Write your message here. e.g.
 Deer Diana,
@@ -22,6 +23,9 @@ const message = ref("");
 const state = ref(ControlState.ENCRYPTER);
 
 const $toaster = inject<ToasterController>('toaster');
+
+// TODO: Create a toggle for this
+const slowTypewriterMode = ref(true);
 
 const KEY_PREFIX = "secret key prefix";
 
@@ -107,7 +111,8 @@ const copyText = () => {
         <div class="copy-btn-wrapper">
           <Button @click="copyText" class="copy-btn">Copy text</Button>
         </div>
-        <span v-html="converted"></span>
+        <span v-if="state === ControlState.ENCRYPTER" v-html="converted"></span>
+        <Typewriter v-else :text="converted" :disableTypewriter="!slowTypewriterMode" />
       </div>
     </div>
   </main>
