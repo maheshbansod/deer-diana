@@ -91,7 +91,17 @@ const copyText = () => {
       </template>
       <template v-else>
         <!-- the decryption plain text editor -->
-        <textarea class="editor" :placeholder="receivedPlaceholder" v-model="message" spellcheck="false" data-gramm="false"></textarea>
+        <textarea
+          class="editor"
+          :class="{
+            'editor--error': message.length > 0 && (!converted || converted.length === 0 || converted === 'Invalid')
+          }"
+          :placeholder="receivedPlaceholder"
+          v-model="message"
+          spellcheck="false"
+          data-gramm="false"
+        >
+        </textarea>
       </template>
       <div class="converted-message-wrapper" v-show="message?.length > 0">
         <div class="copy-btn-wrapper">
@@ -109,6 +119,10 @@ const copyText = () => {
   height: 70vh;
   /* padding needed to make sure the last line isn't hidden on overflow */
   padding-bottom: 1rem;
+}
+
+.editor--error {
+  color: red;
 }
 
 .mode-area {
