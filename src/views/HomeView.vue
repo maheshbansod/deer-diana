@@ -90,7 +90,8 @@ const copyText = () => {
         </div>
       </template>
       <template v-else>
-        <textarea class="editor" :placeholder="receivedPlaceholder" v-model="message"></textarea>
+        <!-- the decryption plain text editor -->
+        <textarea class="editor" :placeholder="receivedPlaceholder" v-model="message" spellcheck="false" data-gramm="false"></textarea>
       </template>
       <div class="converted-message-wrapper" v-show="message?.length > 0">
         <div class="copy-btn-wrapper">
