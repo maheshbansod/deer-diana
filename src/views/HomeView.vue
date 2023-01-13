@@ -53,8 +53,14 @@ const setMode = (value: ControlState) => {
   state.value = value;
 };
 
-const copyText = () => {
-  copyTextToClipboard(converted.value);
+const copyText = (html = false) => {
+  if (html) {
+    // extract text from string containing HTML tags
+    const text = converted.value.replace(/<[^>]*>?/gm, '');
+    copyTextToClipboard(text);
+  } else {
+    copyTextToClipboard(converted.value);
+  }
   $toaster?.show("Copied to clipboard");
 }
 
@@ -106,7 +112,7 @@ const copyText = () => {
       </template>
       <div class="converted-message-wrapper" v-show="message?.length > 0">
         <div class="copy-btn-wrapper">
-          <Button @click="copyText" class="copy-btn">Copy text</Button>
+          <Button @click="copyText(state === ControlState.DECRYPTER)" class="copy-btn">Copy text</Button>
         </div>
         <span v-if="state === ControlState.ENCRYPTER" v-html="converted"></span>
         <Typewriter v-else :text="converted" :disableTypewriter="!slowTypewriterMode" />
