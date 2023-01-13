@@ -3,15 +3,15 @@
 <template>
   <div class="typewriter">
     <span class="typewriter__text" v-html="text"></span>
-    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { onUnmounted, ref, watch } from 'vue';
 
 const props = defineProps<{
-    text: string;
-    disableTypewriter?: boolean;
+  text: string;
+  disableTypewriter?: boolean;
 }>();
 
 
@@ -45,21 +45,21 @@ onUnmounted(() => {
 });
 
 
-watch(() => props.text, (_newText) => {
-    if(props.disableTypewriter) {
-        text.value = props.text;
-        return;
-    }
-    text.value = "";
-    consumed_text.value = 0;
-    clearInterval(interval);
-    interval = setInterval(updater, interval_duration);
+watch(() => `${props.text}${props.disableTypewriter}`, (_newText) => {
+  text.value = "";
+  consumed_text.value = 0;
+  clearInterval(interval);
+  clearInterval(interval_caret);
+  if (props.disableTypewriter) {
+    text.value = props.text;
+    return;
+  }
+  interval = setInterval(updater, interval_duration);
 });
 
 </script>
 
 <style scoped>
-
 .typewriter {
   position: relative;
   display: inline-block;
@@ -75,6 +75,4 @@ watch(() => props.text, (_newText) => {
   /* Typewriter like font */
   font-family: monospace;
 }
-
-
 </style>

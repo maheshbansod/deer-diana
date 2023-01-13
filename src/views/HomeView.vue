@@ -5,6 +5,7 @@ import { copyTextToClipboard } from "@/utils/common";
 import type { ToasterController } from "@/components/toaster/Toaster";
 import Button from '@/components/Button/Button.vue';
 import Typewriter from '@/components/Typewriter.vue';
+import Toggle from '@/components/Toggle.vue';
 
 const senderPlaceholder = `Write your message here. e.g.
 Deer Diana,
@@ -66,7 +67,7 @@ const copyText = () => {
       <div class="mode-title">
         <span>&nbsp;</span>
         <div @click="setMode(ControlState.ENCRYPTER)"
-          :class="{'mode-title--selected':state === ControlState.ENCRYPTER}">
+          :class="{ 'mode-title--selected': state === ControlState.ENCRYPTER }">
           Encrypt
         </div>
         <div @click="setMode(ControlState.DECRYPTER)"
@@ -83,10 +84,13 @@ const copyText = () => {
         </p>
       </div>
     </div>
-    <div class="input-wrapper">
+    <div class="config-wrapper">
       <span>Key</span>
       <input type="text" placeholder="Key" v-model="key" />
     </div>
+    <Toggle v-if="state === ControlState.DECRYPTER" v-model="slowTypewriterMode">
+      Enable animation
+    </Toggle>
     <div class="content">
       <template v-if="state === ControlState.ENCRYPTER">
         <div class="editor">
@@ -95,16 +99,9 @@ const copyText = () => {
       </template>
       <template v-else>
         <!-- the decryption plain text editor -->
-        <textarea
-          class="editor"
-          :class="{
-            'editor--error': message.length > 0 && (!converted || converted.length === 0 || converted === 'Invalid')
-          }"
-          :placeholder="receivedPlaceholder"
-          v-model="message"
-          spellcheck="false"
-          data-gramm="false"
-        >
+        <textarea class="editor" :class="{
+          'editor--error': message.length > 0 && (!converted || converted.length === 0 || converted === 'Invalid')
+        }" :placeholder="receivedPlaceholder" v-model="message" spellcheck="false" data-gramm="false">
         </textarea>
       </template>
       <div class="converted-message-wrapper" v-show="message?.length > 0">
@@ -148,7 +145,7 @@ const copyText = () => {
   transition: transform 0.2s;
 }
 
-.mode-title > * {
+.mode-title>* {
   padding: 0.2rem;
   text-align: center;
   user-select: none;
@@ -159,14 +156,14 @@ div.mode-title--selected {
   transform: translate(0);
 }
 
-.input-wrapper {
+.config-wrapper {
   display: inline-flex;
   padding: 0.2rem;
   margin: 0.2rem 0;
-  background-color: var(--color-background-soft);
+  background-color: var(--color-background-config);
 }
 
-.input-wrapper>span {
+.config-wrapper>span {
   margin: 0.2rem;
 }
 
