@@ -40,7 +40,7 @@ const checked = computed({
 
 <style scoped>
 .toggle {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     cursor: pointer;
 }
@@ -51,7 +51,7 @@ const checked = computed({
 
 .toggle__switch {
     position: relative;
-    width: 2rem;
+    width: 2.5rem;
     height: 1rem;
     background-color: var(--color-toggle-off);
     border-radius: 0.5rem;
@@ -66,14 +66,20 @@ const checked = computed({
     position: absolute;
     top: 0;
     left: 0;
-    width: 1rem;
-    height: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
     background-color: var(--color-background-soft);
     border-radius: 50%;
-    transition: transform 0.2s;
+    transform: translate(-0.25rem, -0.25rem);
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 0 1px 0;
+}
+
+.toggle:hover .toggle__switch__slider {
+    box-shadow: 0 0 2px 0;
 }
 
 .toggle__switch.on .toggle__switch__slider {
-    transform: translateX(1rem);
+    transform: translate(1.5rem, -0.25rem);
 }
 </style>

@@ -166,6 +166,7 @@ div.mode-title--selected {
   display: inline-flex;
   padding: 0.2rem;
   margin: 0.2rem 0;
+  margin-right: 1rem;
   background-color: var(--color-background-config);
 }
 

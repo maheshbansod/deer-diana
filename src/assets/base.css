@@ -30,7 +30,7 @@
   --color-background-config: var(--vt-c-blue);
 
   /* colors for the toggle - light reddish when toggle is on and light greenish when off */
-  --color-toggle-off: #e7c3c3;
+  --color-toggle-off: #c9c8c8;
   --color-toggle-on: #c3e7c3;
 
   --color-border: var(--vt-c-divider-light-2);
