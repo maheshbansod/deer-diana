@@ -80,6 +80,6 @@ const checked = computed({
 }
 
 .toggle__switch.on .toggle__switch__slider {
-    transform: translate(1.5rem, -0.25rem);
+    transform: translate(1.25rem, -0.25rem);
 }
 </style>
