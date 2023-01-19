@@ -88,15 +88,16 @@ const copyText = (html = false) => {
         <p v-else-if="state === ControlState.DECRYPTER">
           Received an encrypted message? Use this to read it.
         </p>
+
+        <div class="config-wrapper">
+          <span>Key</span>
+          <input type="text" placeholder="Key" v-model="key" />
+        </div>
+        <Toggle v-if="state === ControlState.DECRYPTER" v-model="slowTypewriterMode">
+          Enable animation
+        </Toggle>
       </div>
     </div>
-    <div class="config-wrapper">
-      <span>Key</span>
-      <input type="text" placeholder="Key" v-model="key" />
-    </div>
-    <Toggle v-if="state === ControlState.DECRYPTER" v-model="slowTypewriterMode">
-      Enable animation
-    </Toggle>
     <div class="content">
       <template v-if="state === ControlState.ENCRYPTER">
         <div class="editor">
