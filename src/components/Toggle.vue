@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 
-import { defineProps, defineEmits, computed } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps({
     modelValue: {
