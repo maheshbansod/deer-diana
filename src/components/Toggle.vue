@@ -52,6 +52,7 @@ $toggle_height: 1rem;
 
 .toggle__label {
     margin-right: 0.5rem;
+    user-select: none;
 }
 
 .toggle__switch {
