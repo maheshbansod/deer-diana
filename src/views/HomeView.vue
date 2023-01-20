@@ -91,7 +91,7 @@ const copyText = (html = false) => {
 
         <div class="config-wrapper">
           <span>Key</span>
-          <input type="text" placeholder="Key" v-model="key" />
+          <input class="key-input" type="text" placeholder="Key" v-model="key" />
         </div>
         <Toggle v-if="state === ControlState.DECRYPTER" v-model="slowTypewriterMode">
           Enable animation
@@ -122,7 +122,7 @@ const copyText = (html = false) => {
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .editor {
   width: 50%;
   height: 70vh;
@@ -135,8 +135,16 @@ const copyText = (html = false) => {
 }
 
 .mode-area {
-  background-color: var(--color-background-mute);
-  padding: 0.2rem;
+  background-color: #79c2e6;
+
+  padding: {
+    left: 0.5rem;
+    bottom: 0.5rem;
+  }
+}
+
+.key-input {
+  width: 3rem;
 }
 
 .mode-title {
@@ -150,6 +158,10 @@ const copyText = (html = false) => {
   position: absolute;
   transform: translateX(100%);
   transition: transform 0.2s;
+
+  &:not(.mode-title--selected) {
+    background-color: var(--color-background-mute);
+  }
 }
 
 .mode-title>* {
@@ -158,8 +170,7 @@ const copyText = (html = false) => {
   user-select: none;
 }
 
-div.mode-title--selected {
-  background-color: var(--color-background-soft);
+.mode-title>.mode-title--selected {
   transform: translate(0);
 }
 
