@@ -19,7 +19,7 @@ enum ControlState {
   DECRYPTER
 }
 
-const key = ref("0");
+const key = ref("");
 const message = ref("");
 const state = ref(ControlState.ENCRYPTER);
 
