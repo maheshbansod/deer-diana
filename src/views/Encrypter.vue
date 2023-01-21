@@ -57,6 +57,11 @@ const copyText = () => {
 </script>
 
 <style scoped lang="scss">
+.mode-description {
+    padding: 0.5rem;
+    background-color: var(--color-background-description);
+}
+
 .editor {
     width: 50%;
     height: 70vh;

@@ -28,6 +28,7 @@
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);
   --color-background-config: var(--vt-c-blue);
+  --color-background-description: lightcyan;
 
   /* colors for the toggle - light reddish when toggle is on and light greenish when off */
   --color-toggle-off: #c9c8c8;
