@@ -1,30 +1,32 @@
 <template>
-    <div class="mode-description">
-        <p>
-            Received an encrypted message? Use this to read it.
-        </p>
+    <Layout>
+        <template #description>
+            <p>
+                Received an encrypted message? Use this to read it.
+            </p>
 
-        <div class="config-wrapper">
-            <span>Key</span>
-            <input class="key-input" type="text" placeholder="Key" v-model="key" />
-        </div>
-        <Toggle v-model="slowTypewriterMode">
-            Enable animation
-        </Toggle>
-    </div>
-    <div class="content">
-        <!-- the decryption plain text editor -->
-        <textarea class="editor" :class="{
-            'editor--error': message.length > 0 && (!converted || converted.length === 0 || converted === 'Invalid')
-        }" :placeholder="receivedPlaceholder" v-model="message" spellcheck="false" data-gramm="false">
-        </textarea>
-        <div class="converted-message-wrapper" v-show="message?.length > 0">
-            <div class="copy-btn-wrapper">
-                <Button @click="copyText()" class="copy-btn">Copy text</Button>
+            <div class="config-wrapper">
+                <span>Key</span>
+                <input class="key-input" type="text" placeholder="Key" v-model="key" />
             </div>
-            <Typewriter :text="converted" :disableTypewriter="!slowTypewriterMode" />
-        </div>
-    </div>
+            <Toggle v-model="slowTypewriterMode">
+                Enable animation
+            </Toggle>
+        </template>
+        <template #content>
+            <!-- the decryption plain text editor -->
+            <textarea class="editor" :class="{
+                'editor--error': message.length > 0 && (!converted || converted.length === 0 || converted === 'Invalid')
+            }" :placeholder="receivedPlaceholder" v-model="message" spellcheck="false" data-gramm="false">
+            </textarea>
+            <div class="converted-message-wrapper" v-show="message?.length > 0">
+                <div class="copy-btn-wrapper">
+                    <Button @click="copyText()" class="copy-btn">Copy text</Button>
+                </div>
+                <Typewriter :text="converted" :disableTypewriter="!slowTypewriterMode" />
+            </div>
+        </template>
+    </Layout>
 </template>
 
 <script setup lang="ts">
@@ -34,6 +36,7 @@ import Button from '@/components/Button/Button.vue';
 import type { ToasterController } from '@/components/toaster/Toaster';
 import Toggle from '@/components/Toggle.vue';
 import Typewriter from '@/components/Typewriter.vue';
+import Layout from '@/layout/layout.vue';
 import { KEY_PREFIX } from '@/shared/constants';
 import { copyTextToClipboard } from '@/utils/common';
 import { AES, enc } from 'crypto-js';
@@ -68,15 +71,8 @@ const copyText = () => {
 </script>
 
 <style scoped lang="scss">
-.mode-description {
-    padding: 0.5rem;
-    background-color: var(--color-background-description);
-}
-
-
 .editor {
     width: 50%;
-    height: 70vh;
     /* padding needed to make sure the last line isn't hidden on overflow */
     padding-bottom: 1rem;
 }
@@ -115,14 +111,7 @@ const copyText = () => {
     justify-content: flex-end;
 }
 
-.content {
-    display: flex;
-}
-
 @media only screen and (max-width: 600px) {
-    .content {
-        display: block;
-    }
 
     .editor,
     .converted-message-wrapper {

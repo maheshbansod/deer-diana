@@ -6,7 +6,7 @@ import Decrypter from "./Decrypter.vue";
 </script>
 
 <template>
-  <main>
+  <main style="height: 100%">
     <h1>Hii</h1>
     <Tabs :tabs="[
       { name: 'Encrypt', component: Encrypter },

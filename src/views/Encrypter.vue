@@ -1,25 +1,28 @@
 <template>
-    <div class="mode-description">
-        <p>
-            Use this to send a message to your loved one.
-        </p>
+    <Layout>
+        <template #description>
+            <p>
+                Use this to send a message to your loved one.
+            </p>
 
-        <div class="config-wrapper">
-            <span>Key</span>
-            <input class="key-input" type="text" placeholder="Key" v-model="key" />
-        </div>
-    </div>
-    <div class="content">
-        <div class="editor">
-            <QuillEditor :placeholder="senderPlaceholder" theme="snow" v-model:content="message" contentType="html" />
-        </div>
-        <div class="converted-message-wrapper" v-show="message?.length > 0">
-            <div class="copy-btn-wrapper">
-                <Button @click="copyText()" class="copy-btn">Copy text</Button>
+            <div class="config-wrapper">
+                <span>Key</span>
+                <input class="key-input" type="text" placeholder="Key" v-model="key" />
             </div>
-            <span v-html="converted"></span>
-        </div>
-    </div>
+        </template>
+        <template #content>
+            <div class="editor">
+                <QuillEditor :placeholder="senderPlaceholder" theme="snow" v-model:content="message"
+                    contentType="html" />
+            </div>
+            <div class="converted-message-wrapper" v-show="message?.length > 0">
+                <div class="copy-btn-wrapper">
+                    <Button @click="copyText()" class="copy-btn">Copy text</Button>
+                </div>
+                <span v-html="converted"></span>
+            </div>
+        </template>
+    </Layout>
 </template>
 
 <script setup lang="ts">
@@ -30,6 +33,7 @@ import { ref, computed, inject } from 'vue';
 import { KEY_PREFIX } from '@/shared/constants';
 import Button from '@/components/Button/Button.vue';
 import { QuillEditor } from '@vueup/vue-quill';
+import Layout from '@/layout/layout.vue';
 
 
 const senderPlaceholder = `Write your message here. e.g.
@@ -57,14 +61,9 @@ const copyText = () => {
 </script>
 
 <style scoped lang="scss">
-.mode-description {
-    padding: 0.5rem;
-    background-color: var(--color-background-description);
-}
-
 .editor {
     width: 50%;
-    height: 70vh;
+    height: 92%;
     /* padding needed to make sure the last line isn't hidden on overflow */
     padding-bottom: 1rem;
 }
@@ -99,14 +98,7 @@ const copyText = () => {
     justify-content: flex-end;
 }
 
-.content {
-    display: flex;
-}
-
 @media only screen and (max-width: 600px) {
-    .content {
-        display: block;
-    }
 
     .editor,
     .converted-message-wrapper {
