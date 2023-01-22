@@ -136,6 +136,7 @@ $tab_edge_offset: 2px;
 
     background: linear-gradient(to bottom, $tab_gradient_start, $tab_active_color);
     z-index: 2;
+    box-shadow: rgb(33 35 38 / 10%) 0px -10px 10px -10px, rgb(33 35 38 / 10%) 10px 0px 10px -5px
 }
 
 .tabs__header__tab.tabs__header__tab--active::after {
