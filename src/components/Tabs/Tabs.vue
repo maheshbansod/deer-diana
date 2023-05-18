@@ -11,6 +11,7 @@ import type { DTab } from "./Tabs";
 
 // Props
 const props = defineProps<{
+    heading?: string;
     tabs: DTab[];
     activeTab: string;
 }>();
@@ -45,6 +46,7 @@ defineExpose({
 <template>
     <div class="tabs">
         <div class="tabs__header">
+            <h1 class="tabs__heading" v-if="props.heading">{{ props.heading }}</h1>
             <div v-for="tab in props.tabs" :key="tab.name" class="tabs__header__tab"
                 :class="{ 'tabs__header__tab--active': tab.name === activeTab }" @click="setActiveTab(tab.name)">
                 <span class="tab-label">
@@ -77,74 +79,32 @@ $tab_edge_offset: 2px;
 
 .tabs__header {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    padding: $tabs__header__tab__padding;
-    position: relative;
-    overflow: hidden;
+    * {
+        margin: 1rem;
+        padding: 0.5rem;
+    }
+    .tabs__header__tab {
+        cursor: pointer;
+        border-radius: $tab_border_radius;
+        background: linear-gradient(to bottom, $tab_gradient_start, white);
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            background: linear-gradient(to bottom, $tab_gradient_start, white);
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(0, 0, 0, 0.1);
+        }
+        &--active {
+            background: linear-gradient(to bottom, $tab_gradient_start, white);
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(0, 0, 0, 0.1);
+        }
+    }
 }
 
-.tab-label {
-    width: 100%;
-}
-
-.tabs__header::after {
-    content: "";
-    width: 100%;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: 1;
-    background-color: $tab_active_color;
-    height: $tabs__header__tab__padding;
-}
-
-.tabs__header__tab {
-    padding: 0.5rem;
-    cursor: pointer;
-    user-select: none;
-    flex: 1;
-    border-top-left-radius: $tab_border_radius;
-    border-top-right-radius: $tab_border_radius;
-    background: linear-gradient(to bottom, $tab_gradient_start, $tab_inactive_color);
-}
-
-.tabs__header__tab::after,
-.tabs__header__tab::before {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    width: $tabs__gap;
-    height: $tabs__gap;
-    bottom: 0;
-}
-
-.tabs__header__tab::after {
-    right: -$tabs__gap;
-    border-bottom-left-radius: 0.5rem;
-    box-shadow: -2px $tabs__header__tab__padding $tab_inactive_color;
-}
-
-.tabs__header__tab::before {
-    left: -$tabs__gap;
-    border-bottom-right-radius: 0.5rem;
-    box-shadow: 2px $tabs__header__tab__padding $tab_inactive_color;
-}
-
-.tabs__header__tab--active {
-    background-color: $tab_active_color;
-
-    background: linear-gradient(to bottom, $tab_gradient_start, $tab_active_color);
-    z-index: 2;
-    box-shadow: rgb(33 35 38 / 10%) 0px -10px 10px -10px, rgb(33 35 38 / 10%) 10px 0px 10px -5px
-}
-
-.tabs__header__tab.tabs__header__tab--active::after {
-    box-shadow: -$tab_edge_offset $tabs__header__tab__padding $tab_active_color;
-}
-
-.tabs__header__tab.tabs__header__tab--active::before {
-    box-shadow: $tab_edge_offset $tabs__header__tab__padding $tab_active_color;
+.tabs__heading {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #333;
 }
 
 .tabs__content {

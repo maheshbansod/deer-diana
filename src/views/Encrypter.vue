@@ -2,12 +2,12 @@
     <Layout>
         <template #description>
             <p>
-                Use this to send a message to your loved one.
+                Send a message to your loved one.
             </p>
 
             <div class="config-wrapper">
-                <span>Key</span>
-                <input class="key-input" type="text" placeholder="Key" v-model="key" />
+                <span>🔑</span>
+                <input class="key-input" type="text" placeholder=" k e y 🔑 - the encryption key 🗝 that can be used to unlock 🔐 the message later" v-model="key" />
             </div>
         </template>
         <template #content>
@@ -69,19 +69,22 @@ const copyText = () => {
 }
 
 .key-input {
-    width: 3rem;
+    flex: 1;
 }
 
 .config-wrapper {
     display: inline-flex;
-    padding: 0.2rem;
     margin: 0.2rem 0;
     margin-right: 1rem;
     background-color: var(--color-background-config);
+    border-radius: 0.5rem;
+    color:white;
+    width: 70%;
 }
 
 .config-wrapper>span {
     margin: 0.2rem;
+    padding: 0.2rem;
 }
 
 .converted-message-wrapper {

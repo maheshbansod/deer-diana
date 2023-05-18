@@ -7,8 +7,7 @@ import Decrypter from "./Decrypter.vue";
 
 <template>
   <main style="height: 100%">
-    <h1>Hii</h1>
-    <Tabs :tabs="[
+    <Tabs heading="Deer Diana" :tabs="[
       { name: 'Encrypt', component: Encrypter },
       { name: 'Decrypt', component: Decrypter },
     ]" :active-tab="'Encrypt'" />

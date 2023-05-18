@@ -5,13 +5,15 @@
                 Received an encrypted message? Use this to read it.
             </p>
 
-            <div class="config-wrapper">
-                <span>Key</span>
-                <input class="key-input" type="text" placeholder="Key" v-model="key" />
+            <div class="config-wrapper-wrapper">
+                <div class="config-wrapper">
+                    <span>🔑</span>
+                    <input class="key-input" type="text" placeholder=" k e y 🔑 - the encryption key 🗝 that was used to lock 🔐 the message" v-model="key" />
+                </div>
+                <Toggle v-model="slowTypewriterMode">
+                    Enable animation
+                </Toggle>
             </div>
-            <Toggle v-model="slowTypewriterMode">
-                Enable animation
-            </Toggle>
         </template>
         <template #content>
             <!-- the decryption plain text editor -->
@@ -82,19 +84,27 @@ const copyText = () => {
 }
 
 .key-input {
-    width: 3rem;
+    flex: 1;
 }
 
 .config-wrapper {
     display: inline-flex;
-    padding: 0.2rem;
     margin: 0.2rem 0;
     margin-right: 1rem;
     background-color: var(--color-background-config);
+    border-radius: 0.5rem;
+    color:white;
+    width: 70%;
+}
+
+.config-wrapper-wrapper {
+    display: flex;
+    align-items: center;
 }
 
 .config-wrapper>span {
     margin: 0.2rem;
+    padding: 0.2rem;
 }
 
 .converted-message-wrapper {

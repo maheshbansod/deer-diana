@@ -17,8 +17,9 @@
 }
 
 .mode-description {
-    padding: 0.5rem;
-    background-color: var(--color-background-description);
+    padding: 1rem;
+    background-color: #e6e6e6;
+    margin-bottom: 1rem;
 }
 
 .content {
